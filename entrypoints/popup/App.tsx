@@ -1,34 +1,36 @@
-import { useState } from 'react';
-import reactLogo from '@/assets/react.svg';
-import wxtLogo from '/wxt.svg';
-import './App.css';
+import { useEffect, useState } from "react";
+import { storageKeys, defaultBlur } from "@/const";
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [blur, setBlur] = useState(defaultBlur);
+
+  useEffect(() => {
+    storage.getItem<number>(storageKeys.blur).then((v) => {
+      setBlur(v ?? defaultBlur);
+    });
+  }, []);
+
+  const handleSetting = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = Number(e.target.value);
+    setBlur(value);
+    storage.setItem(storageKeys.blur, value);
+  };
 
   return (
-    <>
+    <main>
       <div>
-        <a href="https://wxt.dev" target="_blank">
-          <img src={wxtLogo} className="logo" alt="WXT logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <input id="enable" type="checkbox" />
+        <label htmlFor="enable" style={{ fontWeight: "bold" }}>
+          X-Comfort-Browse
+        </label>
       </div>
-      <h1>WXT + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+
+      <div style={{ marginTop: "16px" }}>
+        <label htmlFor="blur">Blur(px)</label>
+        <input id="blur" type="number" value={blur} onChange={handleSetting} />
       </div>
-      <p className="read-the-docs">
-        Click on the WXT and React logos to learn more
-      </p>
-    </>
+    </main>
   );
 }
 
