@@ -20,7 +20,8 @@ export default defineContentScript({
       // 图片
       '[data-testid="tweetPhoto"]',
       // 视频
-      '[data-testid="videoPlayer"]',
+      // '[data-testid="videoPlayer"]',
+      '[data-testid="videoComponent"]',
       // 分享图
       '[data-testid="card.layoutLarge.media"]'
     ];
@@ -33,12 +34,12 @@ export default defineContentScript({
         const elements = document.querySelectorAll(selector);
 
         elements.forEach((element) => {
-          let comfortId = element.getAttribute('comfort-id');
+          let comfortId = element.getAttribute('data-comfort-id');
 
           if (!comfortId) {
             comfortId = crypto.randomUUID();
 
-            element.setAttribute('comfort-id', comfortId);
+            element.setAttribute('data-comfort-id', comfortId);
 
             const toggleButton = createButton();
 
@@ -49,15 +50,13 @@ export default defineContentScript({
               e.preventDefault();
               e.stopPropagation();
 
-              const targetElement = document.querySelector(`[comfort-id="${comfortId}"]`) as HTMLElement;
+              const targetElement = document.querySelector(`[data-comfort-id="${comfortId}"]`) as HTMLElement;
 
-              if (statusMap.get(comfortId)) {
-                targetElement.style.filter = 'none';
-              } else {
-                targetElement.style.filter = `blur(${blur}px)`;
-              }
+              const blurStatus = statusMap.get(comfortId);
 
-              statusMap.set(comfortId, !statusMap.get(comfortId));
+              targetElement.style.filter = blurStatus ? 'none' : `blur(${blur}px)`;
+
+              statusMap.set(comfortId, !blurStatus);
             });
 
             // 将按钮添加到元素上方
