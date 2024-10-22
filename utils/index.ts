@@ -1,4 +1,4 @@
-export const createButton = (id?: string) => {
+export const createButton = (id: string) => {
     const button = document.createElement('button');
     button.textContent = '👀';
     button.style.position = 'absolute';
@@ -11,6 +11,7 @@ export const createButton = (id?: string) => {
     button.style.border = 'none';
     button.style.borderRadius = '12px';
     button.style.cursor = 'pointer';
+    button.id = id;
 
     return button;
 };

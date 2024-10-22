@@ -35,7 +35,7 @@ async function handleElements() {
 
         element.setAttribute('data-comfort-id', comfortId);
 
-        const toggleButton = createButton();
+        const toggleButton = createButton(comfortId);
 
         // 添加点击事件监听器
         toggleButton.addEventListener('click', (e) => {
@@ -55,6 +55,12 @@ async function handleElements() {
 
         // 将按钮添加到元素上方
         element.parentElement?.insertBefore(toggleButton, element);
+      } else {
+        const targetElement = document.querySelector(`[data-comfort-id="${comfortId}"]`) as HTMLElement;
+
+        if (targetElement && targetElement.querySelectorAll(otherSelectors).length > 0) {
+          document.getElementById(comfortId)?.remove();
+        }
       }
 
       if (!statusMap.has(comfortId)) {
@@ -92,7 +98,7 @@ export default defineContentScript({
     });
 
     // 使用 MutationObserver 监听 DOM 变化
-    const observer = new MutationObserver(handleElements);
+    const observer = new MutationObserver(() => setTimeout(handleElements));
 
     observer.observe(document.body, { childList: true, subtree: true });
   },
