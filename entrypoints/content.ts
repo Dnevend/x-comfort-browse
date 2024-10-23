@@ -20,6 +20,8 @@ async function handleElements() {
   const enable = await storage.getItem<boolean>(storageKeys.enable) ?? true;
   const blur = await storage.getItem<number>(storageKeys.blur) ?? defaultBlur;
 
+  if (!enable) return;
+
   selectors.forEach((selector) => {
     let elements: Element[] = Array.from(document.querySelectorAll(selector));
 
@@ -35,7 +37,7 @@ async function handleElements() {
 
         element.setAttribute('data-comfort-id', comfortId);
 
-        const toggleButton = createButton(comfortId);
+        const toggleButton = createButton(comfortId, handleElements);
 
         // 添加点击事件监听器
         toggleButton.addEventListener('click', (e) => {
@@ -98,7 +100,7 @@ export default defineContentScript({
     });
 
     // 使用 MutationObserver 监听 DOM 变化
-    const observer = new MutationObserver(() => setTimeout(handleElements));
+    const observer = new MutationObserver(handleElements);
 
     observer.observe(document.body, { childList: true, subtree: true });
   },

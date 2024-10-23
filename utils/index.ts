@@ -1,4 +1,4 @@
-export const createButton = (id: string) => {
+export const createButton = (id: string, event?: () => void) => {
     const button = document.createElement('button');
     button.textContent = '👀';
     button.style.position = 'absolute';
@@ -12,6 +12,7 @@ export const createButton = (id: string) => {
     button.style.borderRadius = '12px';
     button.style.cursor = 'pointer';
     button.id = id;
+    button.onclick = () => event?.();
 
     return button;
 };
