@@ -13,14 +13,14 @@ const selectors = [
   '[data-testid="videoComponent"]',
   '[data-testid="videoPlayer"]',
   // 分享图
-  '[data-testid="card.layoutLarge.media"]'
+  '[data-testid="card.layoutLarge.media"]',
+  // 推荐内容
+  '[data-testid="collection-hero-image"]'
 ];
 
 async function handleElements() {
   const enable = await storage.getItem<boolean>(storageKeys.enable) ?? true;
   const blur = await storage.getItem<number>(storageKeys.blur) ?? defaultBlur;
-
-  if (!enable) return;
 
   selectors.forEach((selector) => {
     let elements: Element[] = Array.from(document.querySelectorAll(selector));
@@ -34,46 +34,61 @@ async function handleElements() {
 
       if (!comfortId) {
         comfortId = crypto.randomUUID();
-
         element.setAttribute('data-comfort-id', comfortId);
-
         const toggleButton = createButton(comfortId, handleElements);
 
-        // 添加点击事件监听器
-        toggleButton.addEventListener('click', (e) => {
-          if (!comfortId) return;
-
+        // 更新按钮点击事件
+        toggleButton.onclick = (e) => {
           e.preventDefault();
           e.stopPropagation();
 
-          const targetElement = document.querySelector(`[data-comfort-id="${comfortId}"]`) as HTMLElement;
+          const newStatus = !statusMap.get(comfortId!);
 
-          const blurStatus = statusMap.get(comfortId);
+          statusMap.set(comfortId!, newStatus);
 
-          targetElement.style.filter = blurStatus ? 'none' : `blur(${blur}px)`;
+          if (newStatus) {
+            targetElement.style.filter = `blur(${blur}px)`;
+            toggleButton.innerText = '👀';
+          } else {
+            targetElement.style.filter = 'none';
+            toggleButton.innerText = '🙈';
+          }
+        };
 
-          statusMap.set(comfortId, !blurStatus);
-        });
-
-        // 将按钮添加到元素上方
         element.parentElement?.insertBefore(toggleButton, element);
-      } else {
-        const targetElement = document.querySelector(`[data-comfort-id="${comfortId}"]`) as HTMLElement;
-
-        if (targetElement && targetElement.querySelectorAll(otherSelectors).length > 0) {
-          document.getElementById(comfortId)?.remove();
-        }
       }
 
+      // 当前元素包含覆盖其他待处理元素时
+      if (element.querySelectorAll(otherSelectors).length > 0) {
+        document.getElementById(comfortId)?.remove();
+      }
+
+      // 确保 statusMap 中有这个元素的状态
       if (!statusMap.has(comfortId)) {
         statusMap.set(comfortId, enable);
       }
 
-      // 应用全局模糊设置
-      if (enable && statusMap.get(comfortId)) {
-        (element as HTMLElement).style.filter = `blur(${blur}px)`;
+      const blurStatus = statusMap.get(comfortId);
+      const targetElement = element as HTMLElement;
+      const toggleButton = document.getElementById(comfortId) as HTMLElement;
+
+      if (!enable) {
+        targetElement.style.filter = 'none';
+        toggleButton.style.display = 'none';
+        statusMap.clear()
+        return
       } else {
-        (element as HTMLElement).style.filter = 'none';
+        toggleButton.style.display = 'block';
+      }
+
+      if (blurStatus && targetElement.style.filter !== `blur(${blur}px)`) {
+        targetElement.style.filter = `blur(${blur}px)`;
+        toggleButton.innerText = '👀';
+      }
+
+      if (!blurStatus && targetElement.style.filter !== 'none') {
+        targetElement.style.filter = 'none';
+        toggleButton.innerText = '🙈';
       }
     });
   });
@@ -87,7 +102,7 @@ export default defineContentScript({
   ],
   runAt: 'document_idle',
   main() {
-    console.log('Hello X-Comfort-Browse');
+    console.log('Hello from X-Comfort-Browse.');
 
     handleElements();
 
@@ -100,7 +115,7 @@ export default defineContentScript({
     });
 
     // 使用 MutationObserver 监听 DOM 变化
-    const observer = new MutationObserver(handleElements);
+    const observer = new MutationObserver(() => handleElements());
 
     observer.observe(document.body, { childList: true, subtree: true });
   },
