@@ -78,6 +78,7 @@ async function handleElements() {
         statusMap.clear()
         return
       } else {
+        targetElement.style.transition = '.3s';
         toggleButton.style.display = 'block';
       }
 
