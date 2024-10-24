@@ -1,23 +1,19 @@
 #root {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 1rem;
   text-align: center;
 }
 
 .logo {
-  height: 6em;
-  padding: 1.5em;
+  height: 4em;
+  padding: 1em;
   will-change: filter;
   transition: filter 300ms;
 }
 
 .logo:hover {
   filter: drop-shadow(0 0 2em #54bc4ae0);
-}
-
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
 @keyframes logo-spin {
@@ -30,12 +26,38 @@
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+
+  100% {
+    transform: translateY(0px);
   }
 }
 
-.card {
-  padding: 2em;
+@media (prefers-reduced-motion: no-preference) {
+  .logo {
+    animation: float infinite 5s linear;
+  }
+}
+
+.blur-input {
+  margin: 16px 0;
+}
+
+.blur-input label {
+  font-size: 14px;
+  margin-right: 8px;
+}
+
+.blur-input input {
+  width: 100px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 4px;
 }

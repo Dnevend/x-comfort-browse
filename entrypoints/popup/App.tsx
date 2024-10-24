@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { storageKeys, defaultBlur } from "@/const";
+import { Switch } from "./components/Switch";
 import "./App.css";
 
 function App() {
@@ -28,19 +29,15 @@ function App() {
 
   return (
     <main>
-      <div>
-        <input
-          id="enable"
-          type="checkbox"
-          checked={enable}
-          onChange={handleEnableChange}
-        />
-        <label htmlFor="enable" style={{ fontWeight: "bold" }}>
-          X-Comfort-Browse
-        </label>
-      </div>
+      <h2>X-Comfort-Browse</h2>
 
-      <div style={{ marginTop: "16px" }}>
+      <p>
+        <img src="/Bird.svg" className="logo" />
+      </p>
+
+      <Switch id="enable" checked={enable} onChange={handleEnableChange} />
+
+      <div className="blur-input">
         <label htmlFor="blur">Blur(px)</label>
         <input id="blur" type="number" value={blur} onChange={handleSetting} />
       </div>
