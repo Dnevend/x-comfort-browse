@@ -41,7 +41,7 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .logo {
+  .logo.on {
     animation: float infinite 5s linear;
   }
 }

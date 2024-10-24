@@ -32,7 +32,7 @@ function App() {
       <h2>X-Comfort-Browse</h2>
 
       <p>
-        <img src="/Bird.svg" className="logo" />
+        <img src="/Bird.svg" className={`logo ${enable ? "on" : "off"}`} />
       </p>
 
       <Switch id="enable" checked={enable} onChange={handleEnableChange} />
