@@ -4,6 +4,6 @@ import { defineConfig } from 'wxt';
 export default defineConfig({
   manifest: {
     permissions: ['storage'],
-    host_permissions: ['*://*.x.com/*'],
+    // host_permissions: ['*://*.x.com/*'],
   },
 });

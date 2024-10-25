@@ -1,8 +1,8 @@
 {
-  "name": "X-Comfort-Browse",
-  "description": "X Comfort Browse",
+  "name": "X-Comfort-Browser",
+  "description": "X Comfort Browser",
   "private": true,
-  "version": "1.0",
+  "version": "1.2",
   "type": "module",
   "scripts": {
     "dev": "wxt",

@@ -2,6 +2,9 @@ import { defineContentScript } from "wxt/sandbox";
 import { defaultBlur, storageKeys } from "@/const";
 import { createButton } from "@/utils";
 
+const BLUR_EMOJI = '👀';
+const UN_BLUR_EMOJI = '🙈';
+
 const statusMap = new Map<string, boolean>();
 
 const selectors = [
@@ -23,7 +26,7 @@ async function handleElements() {
   const blur = await storage.getItem<number>(storageKeys.blur) ?? defaultBlur;
 
   selectors.forEach((selector) => {
-    let elements: Element[] = Array.from(document.querySelectorAll(selector));
+    let elements: HTMLElement[] = Array.from(document.querySelectorAll(selector));
 
     const otherSelectors = selectors.filter((s) => s !== selector).join(',');
 
@@ -35,10 +38,10 @@ async function handleElements() {
       if (!comfortId) {
         comfortId = crypto.randomUUID();
         element.setAttribute('data-comfort-id', comfortId);
-        const toggleButton = createButton(comfortId, handleElements);
+        const button = createButton(comfortId, handleElements);
 
         // 更新按钮点击事件
-        toggleButton.onclick = (e) => {
+        button.onclick = (e) => {
           e.preventDefault();
           e.stopPropagation();
 
@@ -47,15 +50,15 @@ async function handleElements() {
           statusMap.set(comfortId!, newStatus);
 
           if (newStatus) {
-            targetElement.style.filter = `blur(${blur}px)`;
-            toggleButton.innerText = '👀';
+            element.style.filter = `blur(${blur}px)`;
+            button.innerText = BLUR_EMOJI;
           } else {
-            targetElement.style.filter = 'none';
-            toggleButton.innerText = '🙈';
+            element.style.filter = 'none';
+            button.innerText = UN_BLUR_EMOJI;
           }
         };
 
-        element.parentElement?.insertBefore(toggleButton, element);
+        element.parentElement?.insertBefore(button, element);
       }
 
       // 当前元素包含覆盖其他待处理元素时
@@ -68,7 +71,6 @@ async function handleElements() {
         statusMap.set(comfortId, enable);
       }
 
-      const blurStatus = statusMap.get(comfortId);
       const targetElement = element as HTMLElement;
       const toggleButton = document.getElementById(comfortId) as HTMLElement;
 
@@ -82,42 +84,35 @@ async function handleElements() {
         toggleButton.style.display = 'block';
       }
 
+      const blurStatus = statusMap.get(comfortId);
       if (blurStatus && targetElement.style.filter !== `blur(${blur}px)`) {
         targetElement.style.filter = `blur(${blur}px)`;
-        toggleButton.innerText = '👀';
+        toggleButton.innerText = BLUR_EMOJI;
       }
 
       if (!blurStatus && targetElement.style.filter !== 'none') {
         targetElement.style.filter = 'none';
-        toggleButton.innerText = '🙈';
+        toggleButton.innerText = UN_BLUR_EMOJI;
       }
     });
   });
 }
 
 export default defineContentScript({
-  matches: [
-    '*://*.twitter.com/*',
-    '*://*.x.com/*',
-    '*://x.com/*'
-  ],
+  matches: ['*://x.com/*'],
   runAt: 'document_idle',
   main() {
     console.log('Hello from X-Comfort-Browse.');
 
-    handleElements();
-
     // 监听 storage 值变化
-    storage.watch<number>(storageKeys.blur, (v) => {
-      handleElements();
-    });
-    storage.watch<boolean>(storageKeys.enable, (v) => {
-      handleElements();
+    [storageKeys.blur, storageKeys.enable].forEach(key => {
+      storage.watch<number | boolean>(key, (v) => {
+        handleElements();
+      });
     });
 
-    // 使用 MutationObserver 监听 DOM 变化
+    // 监听 DOM 变化
     const observer = new MutationObserver(() => handleElements());
-
     observer.observe(document.body, { childList: true, subtree: true });
   },
 });

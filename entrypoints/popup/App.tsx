@@ -29,7 +29,7 @@ function App() {
 
   return (
     <main>
-      <h2>X-Comfort-Browse</h2>
+      <h2>X-Comfort-Browser</h2>
 
       <p>
         <img src="/Bird.svg" className={`logo ${enable ? "on" : "off"}`} />
