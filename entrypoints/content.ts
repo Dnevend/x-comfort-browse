@@ -102,7 +102,7 @@ export default defineContentScript({
   matches: ['*://x.com/*'],
   runAt: 'document_idle',
   main() {
-    console.log('Hello from X-Comfort-Browse.');
+    console.log('Hello from X-Comfort-Browser.');
 
     // 监听 storage 值变化
     [storageKeys.blur, storageKeys.enable].forEach(key => {
