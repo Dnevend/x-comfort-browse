@@ -28,11 +28,21 @@ async function handleElements() {
   selectors.forEach((selector) => {
     let elements: HTMLElement[] = Array.from(document.querySelectorAll(selector));
 
-    const otherSelectors = selectors.filter((s) => s !== selector).join(',');
-
-    elements = elements.filter(element => !element.querySelectorAll(otherSelectors).length);
-
     elements.forEach((element) => {
+      let current = element;
+      let hasBlur = false;
+
+      while (current.parentElement !== null) {
+        current = current.parentElement;
+        if (current.matches(selectors.join(','))) {
+          hasBlur = true;
+          break;
+        }
+      }
+
+      // 如果已经存在模糊遮罩
+      if (hasBlur) return;
+
       let comfortId = element.getAttribute('data-comfort-id');
 
       if (!comfortId) {
@@ -59,11 +69,6 @@ async function handleElements() {
         };
 
         element.parentElement?.insertBefore(button, element);
-      }
-
-      // 当前元素包含覆盖其他待处理元素时
-      if (element.querySelectorAll(otherSelectors).length > 0) {
-        document.getElementById(comfortId)?.remove();
       }
 
       // 确保 statusMap 中有这个元素的状态
