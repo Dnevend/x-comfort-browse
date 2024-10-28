@@ -18,7 +18,9 @@ const selectors = [
   // 分享图
   '[data-testid="card.layoutLarge.media"]',
   // 推荐内容
-  '[data-testid="collection-hero-image"]'
+  '[data-testid="collection-hero-image"]',
+  // 文章封面
+  '[data-testid="article-cover-image"]',
 ];
 
 async function handleElements() {
