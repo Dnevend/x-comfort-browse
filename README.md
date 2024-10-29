@@ -2,11 +2,11 @@
   <img src="./assets/Bird.svg" width="100" alt="X-Comfort-Browser" />
 </p>
 
-用于浏览推特时，模糊媒体资源。专注于信息获取，减少视觉干扰，避免在公共场合出现尴尬的场景，同时在泛滥的互联网噪音中夺取注意力阵地。
+&emsp;&emsp;用于浏览推特时，模糊媒体资源。专注于信息获取，减少视觉干扰，避免在公共场合出现尴尬的场景，同时在泛滥的互联网噪音中夺取注意力阵地。[详细介绍](https://dnevend.site/blog/attention-and-extension)
 
 <p align="center">
-  <img src="./assets/example-1.png" alt="X-Comfort-Browser" />
-  <img src="./assets/example-2.png" alt="X-Comfort-Browser" />
+  <img src="./assets/example-1.png" alt="X-Comfort-Browser" width="200" />
+  <img src="./assets/example-2.png" alt="X-Comfort-Browser" width="200" />
 </p>
 
 ### 开发参考
