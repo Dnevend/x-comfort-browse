@@ -3,6 +3,9 @@
 ![Chrome Web Store Users](https://img.shields.io/chrome-web-store/users/okfbbbhfbomoeobfifgjnclkdhknccgn)
 ![Mozilla Add-on Version](https://img.shields.io/amo/v/x-comfort-browser)
 
+[在谷歌安装](https://chromewebstore.google.com/detail/x-comfort-browse/okfbbbhfbomoeobfifgjnclkdhknccgn)
+[在火狐安装](https://addons.mozilla.org/zh-CN/firefox/addon/x-comfort-browser/)
+
 
 ![cover](https://github.com/user-attachments/assets/b1151fb8-c231-4d6e-a1e2-43307d46d95d)
 
