@@ -18,6 +18,15 @@
   <img src="./assets/example-2.png" alt="X-Comfort-Browser" width="300" />
 </p>
 
+## 目前支持
+
+- [x] 推特
+  - 媒体资源模糊
+- [x] 知乎
+  - 媒体资源模糊
+  - 广告移除
+- 欢迎提 issue 补充
+
 ## 相关链接
 
 - [Google Extension](https://chromewebstore.google.com/detail/x-comfort-browse/okfbbbhfbomoeobfifgjnclkdhknccgn)
