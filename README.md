@@ -1,5 +1,9 @@
 # X-Comfort-Browser
 
+![Chrome Web Store Users](https://img.shields.io/chrome-web-store/users/okfbbbhfbomoeobfifgjnclkdhknccgn)
+![Mozilla Add-on Version](https://img.shields.io/amo/v/x-comfort-browser)
+
+
 ![cover](https://github.com/user-attachments/assets/b1151fb8-c231-4d6e-a1e2-43307d46d95d)
 
 &emsp;&emsp;信息成瘾和注意力的夺取，在互联网上，平台和用户之间互相形成了彼此同构的势力：
@@ -31,7 +35,7 @@
 
 - [Google Extension](https://chromewebstore.google.com/detail/x-comfort-browse/okfbbbhfbomoeobfifgjnclkdhknccgn)
 
-- [Firefox addon](https://addons.mozilla.org/zh-CN/firefox/addon/x-comfort-browser/)
+- [Firefox ADD-ONS](https://addons.mozilla.org/zh-CN/firefox/addon/x-comfort-browser/)
 
 - [为革命保护“视”力 - 项目介绍](https://dnevend.site/blog/attention-and-extension)
 
