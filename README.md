@@ -1,13 +1,26 @@
+# X-Comfort-Browser
+
+![cover](https://github.com/user-attachments/assets/b1151fb8-c231-4d6e-a1e2-43307d46d95d)
+
+&emsp;&emsp;信息成瘾和注意力的夺取，在互联网上，平台和用户之间互相形成了彼此同构的势力：
+平台通过设计产品的细节给用户以信息反馈（如小红点，精准的内容推荐）使用户养成对这种反馈机制的习惯，来保持用户的活跃度；
+从用户角度，为了更多的流量的媒体和帐号，在发布的内容中精心的挑选和设计，穿插一些可能无关联甚至吸引性的图片。
+图片的滥用和视频的干扰，形成了一种噪音，使得纯文字的阅读能力和信息的表达深度在这视觉的转移运动中逐渐削弱。
+
+&emsp;&emsp;如何获取更多的注意力主动权，保护自己的时间和行为价值，就像做眼保健操一样，是在“课前”需要逐渐的养成良好习惯。
+
+&emsp;&emsp;另外推特这样的内容开放的平台，在公共场合浏览时，有可能跳出一两条不合时宜的图片，让自己老脸一红或措手不及。
+
+&emsp;&emsp;因为这样的出发点，顺手也想尝试下浏览器插件的开发，便产生了这个逛推特的小工具。
+
 <p align="center">
-  <img src="./assets/Bird.svg" width="100" alt="X-Comfort-Browser" />
+  <img src="./assets/example-1.png" alt="X-Comfort-Browser" width="300" />
+  <img src="./assets/example-2.png" alt="X-Comfort-Browser" width="300" />
 </p>
 
-&emsp;&emsp;用于浏览推特时，模糊媒体资源。专注于信息获取，减少视觉干扰，避免在公共场合出现尴尬的场景，同时在泛滥的互联网噪音中夺取注意力阵地。[详细介绍](https://dnevend.site/blog/attention-and-extension)
+## 相关链接
 
-<p align="center">
-  <img src="./assets/example-1.png" alt="X-Comfort-Browser" width="200" />
-  <img src="./assets/example-2.png" alt="X-Comfort-Browser" width="200" />
-</p>
+- [Google Extension](https://chromewebstore.google.com/detail/x-comfort-browse/okfbbbhfbomoeobfifgjnclkdhknccgn)
 
 ### 开发参考
 
