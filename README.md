@@ -11,11 +11,11 @@
 
 &emsp;&emsp;另外推特这样的内容开放的平台，在公共场合浏览时，有可能跳出一两条不合时宜的图片，让自己老脸一红或措手不及。
 
-&emsp;&emsp;因为这样的出发点，顺手也想尝试下浏览器插件的开发，便产生了这个逛推特的小工具。
+&emsp;&emsp;因为这样的出发点，顺手也想尝试下浏览器插件的开发，便产生了这个小工具。
 
 <p align="center">
-  <img src="./assets/example-1.png" alt="X-Comfort-Browser" width="300" />
-  <img src="./assets/example-2.png" alt="X-Comfort-Browser" width="300" />
+  <img src="./assets/blur-50.png" alt="X-Comfort-Browser" width="300" />
+  <img src="./assets/blur-none.png" alt="X-Comfort-Browser" width="300" />
 </p>
 
 ## 目前支持
@@ -25,11 +25,13 @@
 - [x] 知乎
   - 媒体资源模糊
   - 广告移除
-- 欢迎提 issue 补充
+- 欢迎提 issue 补充需求
 
 ## 相关链接
 
 - [Google Extension](https://chromewebstore.google.com/detail/x-comfort-browse/okfbbbhfbomoeobfifgjnclkdhknccgn)
+
+- Firefox Extension（即将提交审核））
 
 ### 开发参考
 
