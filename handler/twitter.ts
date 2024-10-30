@@ -1,5 +1,5 @@
-import { defaultBlur, storageKeys, Emoji } from "@/const";
-import { createButton } from "@/utils";
+import { Emoji } from "@/const";
+import { createButton, getStorages } from "@/utils";
 
 const statusMap = new Map<string, boolean>();
 
@@ -20,8 +20,9 @@ const selectors = [
 ];
 
 export async function handleElements() {
-    const enable = await storage.getItem<boolean>(storageKeys.enable) ?? true;
-    const blur = await storage.getItem<number>(storageKeys.blur) ?? defaultBlur;
+    const { options, blur, globalEnable } = await getStorages();
+
+    const enable = globalEnable && (options.find(it => it.id === 'twitter')?.enable ?? false);
 
     selectors.forEach((selector) => {
         let elements: HTMLElement[] = Array.from(document.querySelectorAll(selector));

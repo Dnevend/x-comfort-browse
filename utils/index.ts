@@ -1,3 +1,6 @@
+import { storageKeys, defaultBlur, Options } from "@/const";
+import { Option } from "@/const/type";
+
 export const createButton = (id: string, event?: () => void) => {
     const button = document.createElement('button');
     button.textContent = '👀';
@@ -16,3 +19,15 @@ export const createButton = (id: string, event?: () => void) => {
 
     return button;
 };
+
+export const getStorages = async () => {
+    const options = await storage.getItem<Option[]>(storageKeys.options) ?? Options;
+    const blur = await storage.getItem<number>(storageKeys.blur) ?? defaultBlur;
+    const globalEnable = await storage.getItem<boolean>(storageKeys.enable) ?? false;
+
+    return {
+        options,
+        blur,
+        globalEnable
+    };
+}

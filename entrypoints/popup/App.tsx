@@ -6,7 +6,8 @@ import "./App.css";
 import { Option } from "@/const/type";
 
 function App() {
-  const [settingExpanded, setSettingExpanded] = useState(false);
+  const [expand, setExpand] = useState(false);
+
   const [enable, setEnable] = useState(true);
   const [blur, setBlur] = useState(defaultBlur);
   const [options, setOptions] = useState<Option[]>(Options);
@@ -59,9 +60,9 @@ function App() {
         <input id="blur" type="number" value={blur} onChange={handleSetting} />
       </div>
 
-      <ExpandButton expanded={settingExpanded} onToggle={setSettingExpanded} />
+      <ExpandButton expanded={expand} onToggle={setExpand} />
 
-      {settingExpanded && (
+      {expand && (
         <table
           cellPadding={5}
           cellSpacing={0}

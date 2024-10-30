@@ -26,7 +26,7 @@ export default defineContentScript({
     }
 
     // 监听参数值值变化
-    [storageKeys.blur, storageKeys.enable].forEach(key => {
+    [storageKeys.blur, storageKeys.enable, storageKeys.options].forEach(key => {
       storage.watch<number | boolean>(key, (v) => {
         executeHandler();
       });
