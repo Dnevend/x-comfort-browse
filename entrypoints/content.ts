@@ -1,125 +1,39 @@
 import { defineContentScript } from "wxt/sandbox";
-import { defaultBlur, storageKeys } from "@/const";
-import { createButton } from "@/utils";
+import { storageKeys } from "@/const";
+import { handleElements as handleTwitterElements } from "@/handler/twitter";
+import { handleElements as handleZhihuElements, removeAdvertise as removeZhihuAdvertise } from "@/handler/zhihu";
 
-const BLUR_EMOJI = '👀';
-const UN_BLUR_EMOJI = '🙈';
-
-const statusMap = new Map<string, boolean>();
-
-const selectors = [
-  // 头像
-  // '[data-testid="Tweet-User-Avatar"]',
-  // 图片
-  '[data-testid="tweetPhoto"]',
-  // 视频
-  '[data-testid="videoComponent"]',
-  '[data-testid="videoPlayer"]',
-  // 分享图
-  '[data-testid="card.layoutLarge.media"]',
-  // 推荐内容
-  '[data-testid="collection-hero-image"]',
-  // 文章封面
-  '[data-testid="article-cover-image"]',
-];
-
-async function handleElements() {
-  const enable = await storage.getItem<boolean>(storageKeys.enable) ?? true;
-  const blur = await storage.getItem<number>(storageKeys.blur) ?? defaultBlur;
-
-  selectors.forEach((selector) => {
-    let elements: HTMLElement[] = Array.from(document.querySelectorAll(selector));
-
-    elements.forEach((element) => {
-      let current = element;
-      let hasBlur = false;
-
-      while (current.parentElement !== null) {
-        current = current.parentElement;
-        if (current.matches(selectors.join(','))) {
-          hasBlur = true;
-          break;
-        }
-      }
-
-      // 如果已经存在模糊遮罩
-      if (hasBlur) return;
-
-      let comfortId = element.getAttribute('data-comfort-id');
-
-      if (!comfortId) {
-        comfortId = crypto.randomUUID();
-        element.setAttribute('data-comfort-id', comfortId);
-        const button = createButton(comfortId, handleElements);
-
-        // 更新按钮点击事件
-        button.onclick = (e) => {
-          e.preventDefault();
-          e.stopPropagation();
-
-          const newStatus = !statusMap.get(comfortId!);
-
-          statusMap.set(comfortId!, newStatus);
-
-          if (newStatus) {
-            element.style.filter = `blur(${blur}px)`;
-            button.innerText = BLUR_EMOJI;
-          } else {
-            element.style.filter = 'none';
-            button.innerText = UN_BLUR_EMOJI;
-          }
-        };
-
-        element.parentElement?.insertBefore(button, element);
-      }
-
-      // 确保 statusMap 中有这个元素的状态
-      if (!statusMap.has(comfortId)) {
-        statusMap.set(comfortId, enable);
-      }
-
-      const targetElement = element as HTMLElement;
-      const toggleButton = document.getElementById(comfortId) as HTMLElement;
-
-      if (!enable) {
-        targetElement.style.filter = 'none';
-        toggleButton.style.display = 'none';
-        statusMap.clear()
-        return
-      } else {
-        targetElement.style.transition = '.3s';
-        toggleButton.style.display = 'block';
-      }
-
-      const blurStatus = statusMap.get(comfortId);
-      if (blurStatus && targetElement.style.filter !== `blur(${blur}px)`) {
-        targetElement.style.filter = `blur(${blur}px)`;
-        toggleButton.innerText = BLUR_EMOJI;
-      }
-
-      if (!blurStatus && targetElement.style.filter !== 'none') {
-        targetElement.style.filter = 'none';
-        toggleButton.innerText = UN_BLUR_EMOJI;
-      }
-    });
-  });
+const handlers = {
+  'x.com': handleTwitterElements,
+  'zhihu.com': () => {
+    handleZhihuElements();
+    removeZhihuAdvertise();
+  },
 }
 
 export default defineContentScript({
-  matches: ['*://x.com/*'],
+  matches: ["<all_urls>"],
   runAt: 'document_idle',
   main() {
-    console.log('Hello from X-Comfort-Browser.');
+    console.log('Hello from X-Comfort-Browser.', window.location.hostname);
 
-    // 监听 storage 值变化
+    const executeHandler = () => {
+      Object.entries(handlers).forEach(([key, handler]) => {
+        if (window.location.hostname.includes(key)) {
+          handler();
+        }
+      });
+    }
+
+    // 监听参数值值变化
     [storageKeys.blur, storageKeys.enable].forEach(key => {
       storage.watch<number | boolean>(key, (v) => {
-        handleElements();
+        executeHandler();
       });
     });
 
-    // 监听 DOM 变化
-    const observer = new MutationObserver(() => handleElements());
+    // 监听页面元素变化
+    const observer = new MutationObserver(() => executeHandler());
     observer.observe(document.body, { childList: true, subtree: true });
   },
 });
