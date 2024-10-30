@@ -31,9 +31,11 @@
 
 - [Google Extension](https://chromewebstore.google.com/detail/x-comfort-browse/okfbbbhfbomoeobfifgjnclkdhknccgn)
 
-- Firefox Extension（即将提交审核））
+- Firefox Extension（即将提交审核）
 
-### 开发参考
+- [为革命保护“视”力 - 项目介绍](https://dnevend.site/blog/attention-and-extension)
+
+## 开发参考
 
 - [Chrome 插件开发全攻略](https://github.com/sxei/chrome-plugin-demo)
 
