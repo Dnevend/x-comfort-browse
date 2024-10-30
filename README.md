@@ -27,7 +27,6 @@
 - [x] 知乎
   - 媒体资源模糊
   - 广告移除
-- 欢迎提 issue 补充需求
 
 ## 相关链接
 
@@ -37,8 +36,6 @@
 
 - [为革命保护“视”力 - 项目介绍](https://dnevend.site/blog/attention-and-extension)
 
-## 开发参考
+---
 
-- [Chrome 插件开发全攻略](https://github.com/sxei/chrome-plugin-demo)
-
-- [下一代浏览器插件开发框架 WXT 入门指南](https://juejin.cn/post/7329724409429917705)
+欢迎提体验并提出建议！
