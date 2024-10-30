@@ -31,7 +31,7 @@
 
 - [Google Extension](https://chromewebstore.google.com/detail/x-comfort-browse/okfbbbhfbomoeobfifgjnclkdhknccgn)
 
-- Firefox Extension（即将提交审核）
+- [Firefox addon](https://addons.mozilla.org/zh-CN/firefox/addon/x-comfort-browser/)
 
 - [为革命保护“视”力 - 项目介绍](https://dnevend.site/blog/attention-and-extension)
 
