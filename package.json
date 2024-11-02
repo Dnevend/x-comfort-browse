@@ -2,7 +2,7 @@
   "name": "X-Comfort-Browser",
   "description": "用于浏览内容平台时，模糊媒体资源。专注于信息获取，减少视觉干扰，避免公共场合出现尴尬的场景，在泛滥的互联网噪音中夺取注意力阵地。",
   "private": true,
-  "version": "1.4",
+  "version": "1.5",
   "type": "module",
   "scripts": {
     "dev": "wxt",
