@@ -1,10 +1,13 @@
 import { defineContentScript } from "wxt/sandbox";
 import { storageKeys } from "@/const";
-import { handleElements as handleTwitterElements } from "@/handler/twitter";
+import { handleElements as handleTwitterElements, removeAdvertise as removeTwitterAdvertise } from "@/handler/twitter";
 import { handleElements as handleZhihuElements, removeAdvertise as removeZhihuAdvertise } from "@/handler/zhihu";
 
 const handlers = {
-  'x.com': handleTwitterElements,
+  'x.com': () => {
+    handleTwitterElements();
+    removeTwitterAdvertise();
+  },
   'zhihu.com': () => {
     handleZhihuElements();
     removeZhihuAdvertise();

@@ -101,3 +101,21 @@ export async function handleElements() {
         });
     });
 }
+
+export function removeAdvertise() {
+    const spans = document.querySelectorAll('div>span:first-child:last-child')
+    for (const span of spans) {
+        if (
+            span.childElementCount > 0 ||
+            span.firstChild?.nodeType !== Node.TEXT_NODE ||
+            !span.firstChild.nodeValue ||
+            !/^(Ad|推荐)$/.test(span.firstChild.nodeValue)
+        ) {
+            continue;
+        }
+        const article = span.closest('article');
+        if (article) {
+            article.innerText = 'Hidden by X-Comfort-Browser.';
+        }
+    }
+}

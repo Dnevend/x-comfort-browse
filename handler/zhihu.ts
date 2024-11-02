@@ -86,6 +86,10 @@ export async function removeAdvertise() {
     ]
 
     elements.forEach((element) => {
-        element.remove();
+        if (element.tagName === 'IMG') {
+            element.parentElement?.replaceChild(document.createTextNode('Hidden by X-Comfort-Browser.'), element);
+        } else {
+            element.innerText = 'Hidden by X-Comfort-Browser.';
+        }
     })
 }

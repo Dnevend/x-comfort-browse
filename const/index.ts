@@ -1,7 +1,7 @@
 import { StorageItemKey } from "wxt/storage";
 import { Option } from "./type";
 
-export const defaultBlur = 5;
+export const defaultBlur = 20;
 
 export const Emoji = {
     BLUR: '👀',
