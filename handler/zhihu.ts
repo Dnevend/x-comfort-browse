@@ -1,5 +1,5 @@
 import { Emoji } from "@/const";
-import { createButton, getStorages } from "@/utils";
+import { createButton, getStorages, getEnable } from "@/utils";
 
 const statusMap = new Map<string, boolean>();
 
@@ -9,9 +9,8 @@ const selectors = [
 ]
 
 export async function handleElements() {
-    const { options, blur, globalEnable } = await getStorages();
-
-    const enable = globalEnable && (options.find(it => it.id === 'zhihu')?.enable ?? false);
+    const { blur } = await getStorages();
+    const enable = await getEnable('zhihu');
 
     const elements: HTMLElement[] = Array.from(document.querySelectorAll(selectors.join(',')))
 
@@ -80,6 +79,9 @@ export async function handleElements() {
 }
 
 export async function removeAdvertise() {
+    const enable = await getEnable('zhihu');
+    if (!enable) return;
+
     const elements: HTMLElement[] = [
         ...Array.from(document.querySelectorAll('.Pc-feedAd-container')) as HTMLElement[],
         ...Array.from(document.querySelectorAll('[alt="广告"]')) as HTMLElement[],
@@ -87,6 +89,7 @@ export async function removeAdvertise() {
 
     elements.forEach((element) => {
         if (element.tagName === 'IMG') {
+            element.parentElement!.style.color = '#00000025';
             element.parentElement?.replaceChild(document.createTextNode('Hidden by X-Comfort-Browser.'), element);
         } else {
             element.innerText = 'Hidden by X-Comfort-Browser.';

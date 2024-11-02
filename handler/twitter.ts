@@ -1,5 +1,5 @@
 import { Emoji } from "@/const";
-import { createButton, getStorages } from "@/utils";
+import { createButton, getEnable, getStorages } from "@/utils";
 
 const statusMap = new Map<string, boolean>();
 
@@ -17,12 +17,13 @@ const selectors = [
     '[data-testid="collection-hero-image"]',
     // 文章封面
     '[data-testid="article-cover-image"]',
+    // 视频小卡片
+    '[data-testid="card.layoutSmall.media"]'
 ];
 
 export async function handleElements() {
-    const { options, blur, globalEnable } = await getStorages();
-
-    const enable = globalEnable && (options.find(it => it.id === 'twitter')?.enable ?? false);
+    const { blur } = await getStorages();
+    const enable = await getEnable('twitter');
 
     selectors.forEach((selector) => {
         let elements: HTMLElement[] = Array.from(document.querySelectorAll(selector));
@@ -102,7 +103,10 @@ export async function handleElements() {
     });
 }
 
-export function removeAdvertise() {
+export async function removeAdvertise() {
+    const enable = await getEnable('twitter');
+    if (!enable) return;
+
     const spans = document.querySelectorAll('div>span:first-child:last-child')
     for (const span of spans) {
         if (
@@ -115,6 +119,7 @@ export function removeAdvertise() {
         }
         const article = span.closest('article');
         if (article) {
+            article.style.color = '#00000025';
             article.innerText = 'Hidden by X-Comfort-Browser.';
         }
     }

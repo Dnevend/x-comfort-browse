@@ -1,9 +1,14 @@
 import { storageKeys, defaultBlur, Options } from "../const";
 
 export default defineBackground(() => {
-  storage.defineItem(storageKeys.blur, { defaultValue: defaultBlur });
-  storage.defineItem(storageKeys.enable, { defaultValue: true });
-  storage.defineItem(storageKeys.options, { defaultValue: Options });
+
+  browser.runtime.onInstalled.addListener(() => {
+    storage.setItems([
+      { key: storageKeys.blur, value: defaultBlur },
+      { key: storageKeys.enable, value: true },
+      { key: storageKeys.options, value: Options },
+    ]);
+  });
 
   console.log('Hello background!', { id: browser.runtime.id });
 });

@@ -13,15 +13,23 @@ function App() {
   const [options, setOptions] = useState<Option[]>(Options);
 
   useEffect(() => {
-    storage.getItem<number>(storageKeys.blur).then((v) => {
-      setBlur(v ?? defaultBlur);
-    });
-    storage.getItem<boolean>(storageKeys.enable).then((v) => {
-      setEnable(v ?? true);
-    });
-    storage.getItem<Option[]>(storageKeys.options).then((v) => {
-      setOptions(v ?? Options);
-    });
+    const initConfig = async () => {
+      const items = await storage.getItems([
+        storageKeys.blur,
+        storageKeys.enable,
+        storageKeys.options,
+      ]);
+      setBlur(
+        items.find((it) => it.key === storageKeys.blur)?.value ?? defaultBlur
+      );
+      setEnable(
+        items.find((it) => it.key === storageKeys.enable)?.value ?? true
+      );
+      setOptions(
+        items.find((it) => it.key === storageKeys.options)?.value ?? Options
+      );
+    };
+    initConfig();
   }, []);
 
   const handleEnableChange = (e: React.ChangeEvent<HTMLInputElement>) => {

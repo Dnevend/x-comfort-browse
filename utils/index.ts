@@ -21,13 +21,21 @@ export const createButton = (id: string, event?: () => void) => {
 };
 
 export const getStorages = async () => {
-    const options = await storage.getItem<Option[]>(storageKeys.options) ?? Options;
-    const blur = await storage.getItem<number>(storageKeys.blur) ?? defaultBlur;
-    const globalEnable = await storage.getItem<boolean>(storageKeys.enable) ?? false;
+    const config = await storage.getItems([storageKeys.options, storageKeys.blur, storageKeys.enable]);
+
+    const options = config.find(it => it.key === storageKeys.options)?.value ?? Options;
+    const blur = config.find(it => it.key === storageKeys.blur)?.value ?? defaultBlur;
+    const enable = config.find(it => it.key === storageKeys.enable)?.value ?? false;
 
     return {
         options,
         blur,
-        globalEnable
+        enable
     };
+}
+
+export const getEnable = async (id: Option['id']) => {
+    const globalEnable = await storage.getItem<boolean>(storageKeys.enable) ?? false;
+    const options = await storage.getItem<Option[]>(storageKeys.options) ?? Options;
+    return globalEnable && (options.find(it => it.id === id)?.enable ?? false);
 }
