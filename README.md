@@ -58,6 +58,8 @@
 
 - [为革命保护“视”力](https://dnevend.site/blog/attention-and-extension)
 
+- [官网模版仓库地址](https://github.com/Dnevend/ext-landing-page)
+
 ---
 
 欢迎体验并[提出建议](https://tally.so/r/wvxEP4)！
