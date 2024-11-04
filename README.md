@@ -11,8 +11,9 @@
 
 ![cover](https://github.com/user-attachments/assets/b1151fb8-c231-4d6e-a1e2-43307d46d95d)
 
-![Chrome Web Store Users](https://img.shields.io/chrome-web-store/users/okfbbbhfbomoeobfifgjnclkdhknccgn)
+![Chrome Web Store Version](https://img.shields.io/chrome-web-store/v/okfbbbhfbomoeobfifgjnclkdhknccgn)
 ![Mozilla Add-on Version](https://img.shields.io/amo/v/x-comfort-browser)
+![Chrome Web Store Users](https://img.shields.io/chrome-web-store/users/okfbbbhfbomoeobfifgjnclkdhknccgn)
 
 ## 主要适用
 
