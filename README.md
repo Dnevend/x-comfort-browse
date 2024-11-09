@@ -7,6 +7,9 @@
   <a href="https://addons.mozilla.org/zh-CN/firefox/addon/x-comfort-browser/" target="_blank">
     <img src="https://img.shields.io/badge/Firefox_Browser-FF7139?style=for-the-badge&logo=Firefox-Browser&logoColor=white" alt="Firefox" />
   </a>
+  <a href="https://microsoftedge.microsoft.com/addons/detail/xcomfortbrowser/cmmlgmdpnpejjkphmbebcdgjmpdijhje" target="_blank">
+    <img src="https://img.shields.io/badge/Microsoft_Edge-0078D7?style=for-the-badge&logo=Microsoft%20Edge&logoColor=white" alt="Edge" />
+  </a>
 </p>
 
 ![cover](https://github.com/user-attachments/assets/b1151fb8-c231-4d6e-a1e2-43307d46d95d)
