@@ -21,7 +21,7 @@ const handlers = {
 }
 
 export default defineContentScript({
-  matches: ["<all_urls>"],
+  matches: ["*://*.x.com/*", "*://*.zhihu.com/*"],
   runAt: 'document_idle',
   main() {
     console.log('Hello from X-Comfort-Browser.', window.location.hostname);
