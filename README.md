@@ -64,6 +64,12 @@
 
 - [官网模版仓库地址](https://github.com/Dnevend/ext-landing-page)
 
+## Thanks For
+
+<a href="https://github.com/Dnevend/x-comfort-browser/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=Dnevend/x-comfort-browser" />
+</a>
+
 ---
 
 欢迎体验并[提出建议](https://tally.so/r/wvxEP4)！
