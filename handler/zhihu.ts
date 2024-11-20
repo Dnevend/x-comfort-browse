@@ -5,7 +5,10 @@ const statusMap = new Map<string, boolean>();
 
 const selectors = [
     '.RichContent img',
-    '.ZVideoItem-video>div'
+    '.ZVideoItem-video>div',
+    'img.VideoItem-posterImg',
+    '.HotItem-img>img',
+    '.ZVideoRecommendationItem-thumbnail>img'
 ]
 
 export async function handleElements() {
@@ -89,10 +92,14 @@ export async function removeAdvertise() {
 
     elements.forEach((element) => {
         if (element.tagName === 'IMG') {
+            element.closest('.Banner-link')?.setAttribute('href', 'javacript:void(0)')
             element.parentElement!.style.color = '#00000025';
             element.parentElement?.replaceChild(document.createTextNode('Hidden by X-Comfort-Browser.'), element);
+            element.parentElement?.querySelector('Banner-adTag')?.remove();
         } else {
             element.innerText = 'Hidden by X-Comfort-Browser.';
+            element.style.marginLeft = '20px';
+            element.closest('.Pc-feedAd-container')?.classList.remove('Pc-feedAd-container');
         }
     })
 }

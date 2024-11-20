@@ -8,6 +8,7 @@ import {
   handleElements as handleZhihuElements,
   removeAdvertise as removeZhihuAdvertise
 } from "@/handler/zhihu";
+import { debounce } from "lodash-es"
 
 const handlers = {
   'x.com': () => {
@@ -21,18 +22,18 @@ const handlers = {
 }
 
 export default defineContentScript({
-  matches: ["<all_urls>"],
+  matches: ["*://*.x.com/*", "*://*.zhihu.com/*"],
   runAt: 'document_idle',
   main() {
     console.log('Hello from X-Comfort-Browser.', window.location.hostname);
 
-    const executeHandler = () => {
+    const executeHandler = debounce(() => {
       Object.entries(handlers).forEach(([key, handler]) => {
         if (window.location.hostname.includes(key)) {
           handler();
         }
       });
-    }
+    });
 
     // 监听参数值值变化
     [storageKeys.blur, storageKeys.enable, storageKeys.options].forEach(key => {
